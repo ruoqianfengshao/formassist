@@ -1,0 +1,7 @@
+public/
+.sass-cache
+.DS_Store
+vendor/
+.idea/
+node_modules/
+.vscode

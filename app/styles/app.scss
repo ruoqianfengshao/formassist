@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+}
+
+body {
+  width: 300px;
+}
+
+p {
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  color: #5E5E5D;
+}
+
+.operation-item {
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f4f4f4;
+    color: #24344e;
+  }
+
+  img {
+    width: 16px;
+    height: 16px;
+    vertical-align: bottom;
+    margin-right: 5px;
+  }
+
+  .key {
+    float: right;
+    color: #ccc;
+  }
+}
