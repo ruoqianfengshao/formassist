@@ -1,12 +1,12 @@
 const click = (e) => {
   chrome.tabs.executeScript(null,
-      {code:`window.AutoInput.init('${e.target.id}')`});
+    {code:`window.AutoInput.init('${e.currentTarget.id}')`});
   window.close();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var btns = document.querySelectorAll('button');
-  for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', click);
+  var items = document.querySelectorAll('.js-operation-item');
+  for (var i = 0; i < items.length; i++) {
+    items[i].addEventListener('click', click);
   }
 });

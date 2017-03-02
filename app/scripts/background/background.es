@@ -6,5 +6,5 @@ const shortcut = {
 
 chrome.commands.onCommand.addListener((command) => {
   chrome.tabs.executeScript(null,
-      {code:`window.AutoInput.init('${shortcut[command]}')`});
+    {code:`window.AutoInput.init('${shortcut[command]}')`});
 });

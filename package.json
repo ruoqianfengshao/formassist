@@ -1,13 +1,14 @@
 {
   "name": "autoinput",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "autofill input with html type and pattern attribute",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "auto",
+    "autocomplete",
+    "autofill",
     "input"
   ],
   "author": "vico",
