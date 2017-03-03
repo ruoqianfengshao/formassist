@@ -1,3 +1,5 @@
+const fs = require("fs-extra")
+
 process.settings = {
   paths: {
     app: "app",
@@ -34,7 +36,7 @@ process.settings = {
 module.exports = (shepherd) => {
   const log = shepherd.log
   const { babel, concat, compass, cmd, uglifier, rev, copy } = shepherd.chains
-  const { repo } = shepherd.plugins
+  const { repo, exec } = shepherd.plugins
 
   const scripts = (src, dest) => {
     return shepherd.src(src)
@@ -49,7 +51,13 @@ module.exports = (shepherd) => {
       .then(shepherd.dest())
   }
 
-  shepherd.task("repo", () => {
+  shepherd.task("clean", () => {
+    return Promise.resolve(
+      fs.emptyDirSync(process.settings.paths.public)
+    )
+  })
+
+  shepherd.task("repo", ['clean'], () => {
     return repo({ bundles: process.settings.bundles })
   })
 
@@ -98,7 +106,7 @@ module.exports = (shepherd) => {
   })
 
   shepherd.task("file", () => {
-    return shepherd.src("manifest.json")
+    return shepherd.src("{manifest.json,key.pem}")
       .then(copy("public/"))
       .then(shepherd.dest())
   })
@@ -119,6 +127,10 @@ module.exports = (shepherd) => {
       }))
       .then(copy("public/", { bases: ["public/"] }))
       .then(shepherd.dest())
+  })
+
+  shepherd.task("zip", () => {
+    return exec("cd public && zip -r Formassist * && mv Formassist.zip ..")
   })
 
   shepherd.task("default", ["watch"])

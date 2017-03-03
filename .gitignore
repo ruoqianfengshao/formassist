@@ -5,3 +5,5 @@ vendor/
 .idea/
 node_modules/
 .vscode
+key.pem
+*.zip
