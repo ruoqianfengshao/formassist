@@ -106,7 +106,7 @@ module.exports = (shepherd) => {
   })
 
   shepherd.task("file", () => {
-    return shepherd.src("{manifest.json,key.pem}")
+    return shepherd.src("manifest.json")
       .then(copy("public/"))
       .then(shepherd.dest())
   })
@@ -130,7 +130,7 @@ module.exports = (shepherd) => {
   })
 
   shepherd.task("zip", () => {
-    return exec("cd public && zip -r Formassist * && mv Formassist.zip ..")
+    return exec("cd public && zip -r Formassist * && mv Formassist.zip .. && cd .. && zip Formassist key.pem")
   })
 
   shepherd.task("default", ["watch"])

@@ -1,7 +1,7 @@
 {
-  "name": "autoinput",
+  "name": "Formassist",
   "version": "1.2.0",
-  "description": "autofill input with html type and pattern attribute",
+  "description": "Auto fill input with html type and pattern attribute",
   "main": "index.js",
   "scripts": {
     "test": "ava"
