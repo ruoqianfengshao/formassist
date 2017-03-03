@@ -130,7 +130,7 @@ module.exports = (shepherd) => {
   })
 
   shepherd.task("zip", () => {
-    return exec("cd public && zip -r Formassist * && mv Formassist.zip .. && cd .. && zip Formassist key.pem")
+    return exec("cd public && zip -r Formassist * ../key.pem && mv Formassist.zip ..")
   })
 
   shepherd.task("default", ["watch"])
