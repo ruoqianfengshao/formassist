@@ -16,30 +16,30 @@
     }
 }(window, function () {
   this.patterns = {
-    email: () => "^(?:[a-z0-9]+[_\-+.]+)*[a-z0-9]+@(?:([a-z0-9]+-?)*[a-z0-9]+.)+([a-z]{2,})+$",
+    email: () => "^default@email\\.com$",
     mobile: () => "^1[3-9]\d{9}$",
     tel: () => "^(?:(?:0\d{2,3}[- ]?[1-9]\d{6,7})|(?:[48]00[- ]?[1-9]\d{6}))$",
     url: () => {
       const protocols = '((https?|s?ftp|irc[6s]?|git|afp|telnet|smb):\\/\\/)?'
-      const userInfo = '([a-z0-9]\\w*(\\:[\\S]+)?\\@)?'
-      const domain = '(?:[a-z0-9]+(?:\-[\w]+)*\.)*[a-z]{2,}'
+      const userInfo = '([a-z0-9]\\w{2}(\\:[\\S]{2})?\\@)?'
+      const domain = '(?:[a-z0-9]{3}(?:\-[\\w]{3})?\\.)?[a-z]{1,5}'
       const port = '(:\\d{1,5})?'
       const ip = '\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}'
-      const address = '(\\/\\S*)?'
+      const address = '(\\/\\S{2,5})?'
       const domainType = ["(^", protocols, userInfo, domain, port, address, "$)"]
-      const ipType = ["(^", protocols, userInfo, ip, port, address]
+      const ipType = ["(^", protocols, userInfo, ip, port, address, "$)"]
 
-      return [domainType, "|", ipType].join(",")
+      return domainType.concat(["|"], ipType).join("")
     },
     number: () => "^\-?(?:[1-9]\d*|0)(?:[.]\d+)?$"
 
   }
   this.defaultRegExp = "^[a-zA-Z0-9]{1,20}$"
   this.init = (type) => {
-    const $input = $("input:text,textarea")
+    const $input = $("input:not(:radio,:checkbox,:file),textarea")
     const $rOrC = $("input:radio,input:checkbox")
     const $select = $("select")
-    const $requiredInput = $("input:text[required=required],textarea[required=required]")
+    const $requiredInput = $("input:not(:radio,:checkbox,:file)[required=required],textarea[required=required]")
     const $requiredROrC = $("input:radio[required=required],input:checkbox[required=required]")
     const $requiredSelect = $("select:required")
 
@@ -84,9 +84,9 @@
   this.fillInput = ($input) => {
     $input.each((index, item) => {
       const $item = $(item)
-      const type = this.patterns($item.attr("type"))
-      const pattern = (type ? type() : undefined) || $item.attr("pattern") || this.defaultRegExp
-      $item.val(new RandExp(new RegExp(pattern, 'i')).gen())
+      const type = this.patterns[$item.attr("type")]
+      const pattern = (type ? type() : $item.attr("pattern")) || this.defaultRegExp
+      $item.val(new RandExp(new RegExp(pattern)).gen())
     })
 
     return this

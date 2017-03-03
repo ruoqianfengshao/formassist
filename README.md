@@ -11,10 +11,10 @@ Chrome extension for developer, auto fill form element value based on html attri
 4. support input:required
 5. clean all form element value
 6. shortcut for all operation
+7. support html5 type: email, url, number, mobile(china), tel(china)
 
 ## todo
 1. random string from seed
-2. support more html5 input type
 
 
 
